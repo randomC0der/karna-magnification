@@ -59,7 +59,7 @@ namespace Karna.Magnification
 
         protected virtual void ResizeMagnifier()
         {
-            if ( initialized && (hwndMag != IntPtr.Zero))
+            if (initialized && (hwndMag != IntPtr.Zero))
             {
                 NativeMethods.GetClientRect(form.Handle, ref magWindowRect);
                 // Resize the control to fill the window.
