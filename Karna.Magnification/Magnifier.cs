@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Karna.Magnification
 {
@@ -106,13 +107,13 @@ namespace Karna.Magnification
             }
             sourceRect.bottom = sourceRect.top + height;
 
-            if (this.form == null)
+            if (form == null)
             {
                 timer.Enabled = false;
                 return;
             }
 
-            if (this.form.IsDisposed)
+            if (form.IsDisposed)
             {
                 timer.Enabled = false;
                 return;
@@ -185,7 +186,9 @@ namespace Karna.Magnification
         {
             timer.Enabled = false;
             if (disposing)
+            {
                 timer.Dispose();
+            }
             timer = null;
             form.Resize -= form_Resize;
             RemoveMagnifier();
