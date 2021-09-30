@@ -594,4 +594,39 @@ namespace Karna.Magnification
         WM_KILLFOCUS = 8
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MAGIMAGEHEADER
+    {
+        public uint width;
+        public uint height;
+        public Guid format; // Reference: https://stackoverflow.com/a/31890584/9672569
+        public uint stride;
+        public uint offset;
+        public uint cbSize;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct BITMAPINFO
+    {
+        [MarshalAs(UnmanagedType.Struct, SizeConst = 40)]
+        public BITMAPINFOHEADER bmiHeader;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+        public int[] bmiColors;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct BITMAPINFOHEADER
+    {
+        public int biSize;
+        public long biWidth;
+        public long biHeight;
+        public short biPlanes;
+        public short biBitCount;
+        public uint biCompression;
+        public uint biSizeImage;
+        public long biXPelsPerMeter;
+        public long biYPelsPerMeter;
+        public uint biClrUsed;
+        public uint biClrImportant;
+    }
 }
