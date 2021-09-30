@@ -89,7 +89,7 @@ namespace Karna.Magnification
         public const int SM_SWAPBUTTON = 0x17;
         public const int SM_XVIRTUALSCREEN = 0x4c;
         public const int SM_YVIRTUALSCREEN = 0x4d;
-        
+
         public const string WC_MAGNIFIER = "Magnifier";
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
@@ -128,7 +128,7 @@ namespace Karna.Magnification
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool InvalidateRect(IntPtr hWnd, IntPtr rect, [MarshalAs(UnmanagedType.Bool)] bool erase);
 
-        [DllImport("Magnification.dll", CallingConvention=CallingConvention.StdCall)]
+        [DllImport("Magnification.dll", CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool MagInitialize();
 
@@ -166,5 +166,22 @@ namespace Karna.Magnification
         [DllImport("Magnification.dll", CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool MagGetColorEffect(IntPtr hwnd, ref ColorEffect pEffect);
+
+        public delegate bool ImageScalingCallback(IntPtr hwnd, IntPtr srcdata, MAGIMAGEHEADER srcheader, ref IntPtr destdata, MAGIMAGEHEADER destheader, RECT unclipped, RECT clipped, IntPtr dirty);
+
+        [DllImport("Magnification.dll", CallingConvention = CallingConvention.StdCall)]
+        public static extern bool MagSetImageScalingCallback(IntPtr hwnd, [MarshalAs(UnmanagedType.FunctionPtr)] ImageScalingCallback callback);
+
+        [DllImport("Gdi32.dll")]
+        internal static extern bool DeleteObject(IntPtr hDC);
+
+        [DllImport("Gdi32.dll", SetLastError = true)]
+        public static extern bool DeleteDC(IntPtr hDC);
+
+        [DllImport("User32.dll", SetLastError = true)]
+        public static extern IntPtr GetWindowDC(IntPtr hWnd);
+
+        [DllImport("Gdi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr CreateDIBitmap(IntPtr hdc, ref BITMAPINFOHEADER lpbmih, int fdwInit, IntPtr lpbInit, ref BITMAPINFO lpBitsInfo, uint fuUsage);
     }
 }
