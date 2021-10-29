@@ -154,10 +154,10 @@ namespace Karna.Magnification
 
         [DllImport("Magnification.dll", CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool MagSetWindowFilterList(IntPtr hwnd, int dwFilterMode, int count, IntPtr pHWND);
+        public static extern bool MagSetWindowFilterList(IntPtr hwnd, int dwFilterMode, int count, IntPtr[] pHWND);
 
         [DllImport("Magnification.dll", CallingConvention = CallingConvention.StdCall)]
-        public static extern int MagGetWindowFilterList(IntPtr hwnd, IntPtr pdwFilterMode, int count, IntPtr pHWND);
+        public static extern int MagGetWindowFilterList(IntPtr hwnd, IntPtr pdwFilterMode, int count, ref IntPtr pHWND);
 
         [DllImport("Magnification.dll", CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]

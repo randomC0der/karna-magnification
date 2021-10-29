@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Magnifier.cs" />
+    <Compile Include="MagnifierFork.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="NativeStructures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
